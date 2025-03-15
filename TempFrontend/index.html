@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home Page</title>
+  <style type="text/css">
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #login-button {
+      background-color: #4CAF50;
+      color: white;
+    }
+    #signup-button {
+      background-color: #F44336;
+      color: white;
+    }
+  </style>
+  <script src="home.js"></script>
+</head>
+<body>
+  <h1 id="greeting"></h1>
+  <h1>Login and Sign Up Page</h1>
+  <button id="login-button" onclick="window.location.href='/login'">Login</button>
+  <button id="signup-button" onclick="window.location.href='/signup'">Sign Up</button>
+</body>
+</html>

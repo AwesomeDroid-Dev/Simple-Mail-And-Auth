@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <style type="text/css">
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    form {
+      display: inline-block;
+    }
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+    }
+    button[type=submit]:hover {
+      opacity: 0.8;
+    }
+    .container {
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sign Up</h1>
+  <form id="signupForm" name="signupForm" onsubmit="return validateForm()">
+    <div class="container">
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" id="username" required>
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" id="password" required>
+      <button type="submit">Sign Up</button>
+    </div>
+  </form>
+  <p>Already have an account? <a href="/login">Login</a></p>
+
+  <script src="signup.js"></script>
+</body>
+</html>
