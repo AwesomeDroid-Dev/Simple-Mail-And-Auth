@@ -13,4 +13,3 @@ const verifyPassword = (password, hashedPassword) => {
 };
 
 export { hashPassword, verifyPassword };
-

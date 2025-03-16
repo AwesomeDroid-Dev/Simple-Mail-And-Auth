@@ -17,7 +17,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event){
     .then(function(response) {
       response.json().then(function(data) {
         if (data.success) {
-          document.cookie = `userId=${data.userId}; Path=/; SameSite=Strict`;
+          document.cookie = `sessionId=${data.sessionId}; Path=/; SameSite=Strict`;
           window.location.href = "/";
         } else {
           alert(data.message);

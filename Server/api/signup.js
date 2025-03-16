@@ -1,6 +1,7 @@
 import { readByUsername } from '../DBtools/read.js';
 import { insertUser } from '../DBtools/write.js';
 import { hashPassword } from '../Encryption/encryption.js';
+import { createSessionId } from '../Session/Session.js';
 
 export default (req, res) => {
     const { username, password } = req.body;
@@ -16,7 +17,16 @@ export default (req, res) => {
             insertUser({ username, password: hashedPassword })
                 .then(userId => {
                     console.log('Signup successful! ');
-                    return res.status(200).json({ success: true, message: 'Signup successful!', userId: userId });
+                    createSessionId(userId)
+                        .then(sessionId => {
+                            console.log(`Created a new session for user ${userId}`);
+                            res.cookie('sessionId', sessionId, { httpOnly: true, sameSite: 'strict' });
+                            return res.status(200).json({ success: true, message: 'Signup successful!', sessionId: sessionId });
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            return res.status(500).json({ success: false, message: 'Internal Server Error' });
+                    })
                 })
                 .catch(err => {
                     console.error(err);
