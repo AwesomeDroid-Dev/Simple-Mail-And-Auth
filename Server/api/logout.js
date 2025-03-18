@@ -1,4 +1,4 @@
-import { deleteSession } from "../Session/Session.js";
+import { deleteSession } from "../DBtools/write.js";
 import { getCookieValue } from "../Session/Session.js";
 
 export default (req, res) => {

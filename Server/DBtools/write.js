@@ -45,8 +45,34 @@ const removeUser = userId => {
     });
 };
 
+const insertSession = (sessionId, userId, expirationDate) => {
+    return new Promise((resolve, reject) => {
+        db.run('INSERT INTO sessions (sessionId, userId, expirationDate) VALUES (?,?,?)', sessionId, userId, expirationDate, function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(this.changes);
+            }
+        });
+    });
+};
+
+const deleteSession = sessionId => {
+    return new Promise((resolve, reject) => {
+        db.run('DELETE FROM sessions WHERE sessionId = ?', sessionId, function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(this.changes);
+            }
+        });
+    });
+};
+
 export {
     insertUser,
     editUser,
-    removeUser
+    removeUser,
+    insertSession,
+    deleteSession
 };

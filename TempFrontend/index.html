@@ -2,38 +2,18 @@
 <html>
 <head>
   <title>Home Page</title>
-  <style type="text/css">
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      opacity: 0.8;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="index.css">
   <script src="index.js"></script>
 </head>
 <body>
   <h1 id="greeting"></h1>
-  <div style="display: flex; justify-content: center; gap: 10px;">
+  <div id="button-container" style="display: flex; justify-content: center; gap: 10px;">
     <button id="login-button" onclick="window.location.href='/login'">Login</button>
     <button id="signup-button" onclick="window.location.href='/signup'">Sign Up</button>
     <button id="logout-button" onclick="logout()">Log out</button>
+    <button id="inbox-button" style="display: none;" onclick="window.location.href='/mail'">Inbox</button>
   </div>
 </body>
 </html>
+
 

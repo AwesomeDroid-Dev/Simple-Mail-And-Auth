@@ -26,3 +26,26 @@ export const readByUserId = (id) => {
   });
 };
 
+export const getSessionByUserId = (userId) => {
+  return new Promise((resolve, reject) => {
+    db.get('SELECT * FROM sessions WHERE userId = ?', userId, (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    });
+  });
+};
+
+export const getSessionBySessionId = (sessionId) => {
+  return new Promise((resolve, reject) => {
+    db.get('SELECT * FROM sessions WHERE sessionId = ?', sessionId, (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    });
+  });
+};

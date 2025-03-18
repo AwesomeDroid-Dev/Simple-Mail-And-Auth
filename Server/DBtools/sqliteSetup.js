@@ -19,7 +19,7 @@ export default function setupDB() {
 
     db.serialize(function() {
         db.run("CREATE TABLE IF NOT EXISTS users (userId INTEGER PRIMARY KEY, username TEXT, hashedPassword TEXT)");
-        db.run("CREATE TABLE IF NOT EXISTS sessions (sessionId TEXT PRIMARY KEY, userId INTEGER, FOREIGN KEY(userId) REFERENCES users(userId))");
+        db.run("CREATE TABLE IF NOT EXISTS sessions (sessionId TEXT PRIMARY KEY, userId INTEGER, expirationDate INTEGER, FOREIGN KEY(userId) REFERENCES users(userId))");
     });
 
     db.close();

@@ -28,6 +28,18 @@ app.get('/signup', (req, res) => {
   res.sendFile(path.join(process.cwd(), 'TempFrontend/signup/signup.html'));
 });
 
+app.get('/mail', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/mail.html'));
+});
+
+app.get('/mail/view', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/view/view.html'));
+});
+
+app.get('/mail/compose', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/compose/compose.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });

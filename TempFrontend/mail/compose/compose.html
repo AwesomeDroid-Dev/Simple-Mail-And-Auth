@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Compose Email</title>
+  <link rel="stylesheet" type="text/css" href="compose.css">
+</head>
+<body>
+  <h1>Compose Email</h1>
+  <form id="composeForm" name="composeForm" onsubmit="return validateForm()">
+    <div class="container">
+      <label for="to"><b>To</b></label>
+      <input type="text" placeholder="Enter recipient's email" name="to" id="to" required>
+      <label for="subject"><b>Subject</b></label>
+      <input type="text" placeholder="Enter subject" name="subject" id="subject" required>
+      <label for="body"><b>Body</b></label>
+      <textarea name="body" id="body" required></textarea>
+      <button type="submit">Send</button>
+    </div>
+  </form>
+  <p>Go <a href="/mail">back to inbox</a></p>
+  <script src="compose.js"></script>
+</body>
+</html>
