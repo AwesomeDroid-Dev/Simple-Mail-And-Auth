@@ -1,16 +1,12 @@
 import { getMail, parseMail } from "../mail/mail.js";
-import { verifySession } from "../Session/Session.js";
+import { getSessionBySessionId } from "../DBtools/read.js";
 
-export default (req, res) => {
-    verifySession(req)
-    .then((result) => {
-        if (!result) {
-            return res.status(401).json({ message: "Failed to fetch sessionId" });
-        }
-        let mail = getMail(result);
-        parseMail(mail)
-        .then((parsedMail) => {
-            return res.status(200).json(parsedMail);
-        })
-    })
+export default (req, res, sessionId) => {
+  getSessionBySessionId(sessionId).then((session) => {
+    getMail(session.userId).then((mail) => {
+      parseMail(mail).then((parsedMail) => {
+        return res.status(200).json(parsedMail);
+      });
+    });
+  });
 };

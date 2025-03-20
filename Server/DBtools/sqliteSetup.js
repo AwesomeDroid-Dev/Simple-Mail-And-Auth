@@ -6,7 +6,6 @@ dotenv.config();
 
 export default function setupDB() {
     if (process.env.NODE_ENV !== 'production' && process.env.DELETE_DB === 'true' && fs.existsSync('blassera.db')) {
-        console.log("Deleting blassera.db");
         try {
             fs.unlinkSync('blassera.db');
             console.log("Database file deleted successfully.");
@@ -20,6 +19,7 @@ export default function setupDB() {
     db.serialize(function() {
         db.run("CREATE TABLE IF NOT EXISTS users (userId INTEGER PRIMARY KEY, username TEXT, hashedPassword TEXT)");
         db.run("CREATE TABLE IF NOT EXISTS sessions (sessionId TEXT PRIMARY KEY, userId INTEGER, expirationDate INTEGER, FOREIGN KEY(userId) REFERENCES users(userId))");
+        db.run("CREATE TABLE IF NOT EXISTS mail (emailId INTEGER PRIMARY KEY, fromId INTEGER, toId INTEGER, subject TEXT, body TEXT, FOREIGN KEY(fromId) REFERENCES users(userId), FOREIGN KEY(toId) REFERENCES users(userId))");
     });
 
     db.close();

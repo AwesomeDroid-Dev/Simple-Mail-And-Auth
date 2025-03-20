@@ -8,7 +8,7 @@ const db = new sqlite3.Database("blassera.db");
 export const createSessionId = (userId) => {
   const sessionId = uuidv4(); // Generate a unique session ID
   db.run("DELETE FROM sessions WHERE userId = ?", userId);
-  const expirationDate = Date.now() + 15 * 60 * 1000; // 5 seconds in the future
+  const expirationDate = Date.now() + 60 * 60 * 1000; // 1 hour session
   return new Promise((resolve, reject) => {
     db.run(
       "INSERT INTO sessions (sessionId, userId, expirationDate) VALUES (?, ?, ?)",
@@ -27,7 +27,7 @@ export const createSessionId = (userId) => {
 };
 
 export const getCookieValue = (req, key) => {
-  if (!req.headers.cookie) {
+  if (!req.headers || !req.headers.cookie) {
     return undefined;
   }
   const value = req.headers.cookie
@@ -45,7 +45,7 @@ export const verifySession = (req) => {
   }
   return getSessionBySessionId(sessionId).then((session) => {
     if (!session) {
-      return undefined;
+      return false;
     }
     if (session.expirationDate < Date.now()) {
       deleteSession(sessionId);
@@ -53,4 +53,18 @@ export const verifySession = (req) => {
     }
     return sessionId;
   });
+};
+
+export const verifyUser = (req, res, func) => {
+  verifySession(req)
+    .then((result) => {
+      if (!result) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+      return func(req, res, result);
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ message: "Internal Server Error" });
+    })
 };

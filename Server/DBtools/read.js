@@ -49,3 +49,58 @@ export const getSessionBySessionId = (sessionId) => {
     });
   });
 };
+
+export const getMailByEmailId = (emailId) => {
+  return new Promise((resolve, reject) => {
+    db.get('SELECT * FROM mail WHERE emailId = ?', emailId, (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    });
+  });
+};
+
+//get mail of user
+export const getMailFromUserId = (userId) => {
+  return new Promise((resolve, reject) => {
+    db.all('SELECT * FROM mail WHERE fromId = ?', userId, (err, rows) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+};
+
+export const getMailToUserId = (userId) => {
+  return new Promise((resolve, reject) => {
+    db.all('SELECT * FROM mail WHERE toId = ?', userId, (err, rows) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+};
+
+export const getUserBySessionId = (sessionId) => {
+  return new Promise((resolve, reject) => {
+    getSessionBySessionId(sessionId)
+    .then((sessionId) => {
+      readByUserId(sessionId.userId)
+      .then(user => {
+        if (!user) {
+          reject('User not found')
+        }
+        resolve(user)
+      })
+      .catch( err =>
+        reject(err)
+      )
+    })
+  })
+}

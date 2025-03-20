@@ -1,38 +1,48 @@
-import { readByUserId } from "../DBtools/read.js";
+import {
+  readByUserId,
+  getMailToUserId,
+  getMailByEmailId,
+} from "../DBtools/read.js";
 
 export const getMail = (userId) => {
-    return [
-        {
-        id: 128372,
-        from: 652102029108137472,
-        subject: "Hello from Node.js",
-        body: "This is a test email sent from Node.js using SendGrid."
-        },
-        {
-        id: 128373,
-        from: 652102029108137472,
-        subject: "Test 2",
-        body: "Cool Man."
-        },
-    ]
-}
+  return getMailToUserId(userId);
+};
 
 export const getMailById = (emailId) => {
-    return {
-        id: 128372,
-        from: 652102029108137472,
-        subject: "Hello from Node.js",
-        body: "This is a test email sent from Node.js using SendGrid."
-    }
-}
+  return new Promise((resolve, reject) => {
+    getMailByEmailId(Number(emailId))
+      .then((mail) => {
+        readByUserId(mail.fromId)
+          .then((from) => {
+            readByUserId(mail.toId).then((to) => {
+              resolve({
+                id: mail.emailId,
+                from: from.username,
+                to: to.username,
+                subject: mail.subject,
+                body: mail.body,
+              });
+            });
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 
 export const parseMail = (mail) => {
-    return Promise.all(mail.map((mail) => 
-        readByUserId(mail.from).then((user) => ({
-            id: mail.id,
-            from: user.username,
-            subject: mail.subject,
-            body: mail.body
-        }))
-    ));
-}
+  return Promise.all(
+    mail.map((mail) =>
+      readByUserId(mail.fromId).then((user) => ({
+        id: mail.emailId,
+        from: user.username,
+        subject: mail.subject,
+        body: mail.body,
+      }))
+    )
+  );
+};

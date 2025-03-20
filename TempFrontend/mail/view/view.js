@@ -1,24 +1,20 @@
-const emailData = {
-  id: 13048,
-  from: "John Doe",
-  subject: "Hello",
-  body: "Hello, how are you?",
-};
+console.log(new URLSearchParams(window.location.search).get("emailId"))
 
-document.addEventListener("DOMContentLoaded", () => {
-  const emailContainer = document.getElementById("email");
-  
-  const emailSubject = document.createElement("h2");
-  emailSubject.textContent = emailData.subject;
-
-  const emailFrom = document.createElement("p");
-  emailFrom.textContent = `From: ${emailData.from}`;
-
-  const emailBody = document.createElement("p");
-  emailBody.textContent = emailData.body;
-
-  emailContainer.appendChild(emailSubject);
-  emailContainer.appendChild(emailFrom);
-  emailContainer.appendChild(emailBody);
-});
-
+fetch(`/api/mail/view?emailId=${new URLSearchParams(window.location.search).get("emailId")}`)
+  .then((response) => response.json())
+  .then((data) => {
+    emailData = data;
+    const emailContainer = document.getElementById("email");
+    const emailSubject = document.createElement("h2");
+    emailSubject.textContent = emailData.subject;
+    emailContainer.appendChild(emailSubject);
+    const emailFrom = document.createElement("p");
+    emailFrom.textContent = `From: ${emailData.from}`;
+    emailContainer.appendChild(emailFrom);
+    const emailTo = document.createElement("p");
+    emailTo.textContent = `To: ${emailData.to}`;
+    emailContainer.appendChild(emailTo);
+    const emailBody = document.createElement("p");
+    emailBody.textContent = emailData.body;
+    emailContainer.appendChild(emailBody);
+  });

@@ -19,7 +19,6 @@ export default (req, res) => {
                     console.log('Signup successful! ');
                     createSessionId(userId)
                         .then(sessionId => {
-                            console.log(`Created a new session for user ${userId}`);
                             res.cookie('sessionId', sessionId, { httpOnly: true, sameSite: 'strict' });
                             return res.status(200).json({ success: true, message: 'Signup successful!', sessionId: sessionId });
                         })

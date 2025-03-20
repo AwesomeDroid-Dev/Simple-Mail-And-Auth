@@ -8,6 +8,18 @@ const generateUserID = () => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+const generateSessionID = () => {
+    let min = 100000000000000000;
+    let max = 999999999999999999;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const generateMailID = () => {
+    let min = 100000000000000000;
+    let max = 999999999999999999;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 const insertUser = ({ username, password }) => {
     const userId = generateUserID();
     return new Promise((resolve, reject) => {
@@ -69,10 +81,26 @@ const deleteSession = sessionId => {
     });
 };
 
+const insertMail = (fromId, toId, subject, body) => {
+    return new Promise((resolve, reject) => {
+        const emailId = generateMailID();
+        fromId = Number(fromId);
+        toId = Number(toId);
+        db.run('INSERT INTO mail (emailId, fromId, toId, subject, body) VALUES (?,?,?,?,?)', emailId, fromId, toId, subject, body, function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(this.changes);
+            }
+        });
+    });
+};
+
 export {
     insertUser,
     editUser,
     removeUser,
     insertSession,
-    deleteSession
+    deleteSession,
+    insertMail
 };

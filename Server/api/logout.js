@@ -1,8 +1,6 @@
 import { deleteSession } from "../DBtools/write.js";
-import { getCookieValue } from "../Session/Session.js";
 
-export default (req, res) => {
-    const sessionId = getCookieValue(req, "sessionId");
+export default (_req, res, sessionId) => {
     if (!sessionId) {
         return res.status(401).json({ message: "Failed to fetch sessionId" });
     }
