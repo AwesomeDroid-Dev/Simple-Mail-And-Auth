@@ -40,6 +40,10 @@ app.get('/mail/compose', (req, res) => {
   res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/compose/compose.html'));
 });
 
+app.get('/account', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/account/account.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });

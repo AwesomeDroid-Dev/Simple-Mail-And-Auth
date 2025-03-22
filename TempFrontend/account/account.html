@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Account</title>
+    <link rel="stylesheet" type="text/css" href="account.css" />
+  </head>
+  <body>
+    <button class="back-button" onclick="window.location.href='/'">Back to Home</button>
+    <h1>Account</h1>
+    <form
+      class="container"
+      id="accountForm"
+      name="accountForm"
+      onsubmit="return validateForm()"
+    >
+      <div class="container username">
+        <label for="username">Username: </label>
+        <input
+          class="input"
+          type="text"
+          id="username"
+          name="username"
+          value="chickenMan"
+          required
+        />
+        <span id="tag">#WI39DI</span><br />
+      </div>
+      <div class="container password">
+        <label for="password">Password: </label>
+        <input
+          class="input"
+          type="text"
+          id="password"
+          name="password"
+          placeholder="Enter password to change password"
+          required
+        />
+        <button type="button" onclick="changePassword()" id="passwordButton">Get</button>
+      </div>
+      <button type="submit" id="saveButton">Save</button>
+    </form>
+    <script src="account.js"></script>
+  </body>
+</html>
+

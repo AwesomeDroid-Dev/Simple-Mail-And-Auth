@@ -8,6 +8,8 @@ import logoutHandler from './api/logout.js';
 import mailHandler from './api/mail.js';
 import composeMailHandler from './api/compose.js';
 import viewMailHandler from './api/view.js';
+import accountHandler from './api/account.js';
+import changePasswordHandler from './api/changePassword.js';
 
 const router = express.Router();
 
@@ -36,6 +38,10 @@ router.get('/mail', (req, res) => verifyUser(req, res, mailHandler));
 router.post('/mail/compose', (req, res) => verifyUser(req, res, composeMailHandler));
 
 router.get('/mail/view', (req, res) => verifyUser(req, res, viewMailHandler));
+
+router.get('/account', (req, res) => verifyUser(req, res, accountHandler));
+
+router.post('/account/changePassword', (req, res) => verifyUser(req, res, changePasswordHandler));
 
 export default router;
 
