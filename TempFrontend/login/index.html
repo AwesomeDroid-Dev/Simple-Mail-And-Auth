@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="loginForm" name="loginForm" onsubmit="return validateForm()">
+    <div class="container">
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" id="username" required>
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" id="password" required>
+      <button type="submit">Login</button>
+    </div>
+  </form>
+  <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+  
+  <script src="script.js"></script>
+</body>
+</html>
+

@@ -17,31 +17,31 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(process.cwd(), 'TempFrontend')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'TempFrontend/home.html'));
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/index.html'));
 });
 
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'TempFrontend/login/login.html'));
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/login/index.html'));
 });
 
 app.get('/signup', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'TempFrontend/signup/signup.html'));
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/signup/index.html'));
 });
 
 app.get('/mail', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/mail.html'));
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/index.html'));
 });
 
 app.get('/mail/view', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/view/view.html'));
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/view/index.html'));
 });
 
 app.get('/mail/compose', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/compose/compose.html'));
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/mail/compose/index.html'));
 });
 
 app.get('/account', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'TempFrontend/account/account.html'));
+  res.sendFile(path.join(process.cwd(), 'TempFrontend/account/index.html'));
 });
 
 app.listen(PORT, () => {
