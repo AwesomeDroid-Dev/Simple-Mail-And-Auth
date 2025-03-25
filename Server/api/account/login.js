@@ -1,6 +1,6 @@
-import { readByUsername } from '../DBtools/read.js';
-import { verifyPassword } from '../Encryption/encryption.js';
-import { createSessionId } from '../Session/Session.js';
+import { readByUsername } from '../../DBtools/read.js';
+import { verifyPassword } from '../../Encryption/encryption.js';
+import { createSessionId } from '../../ApiTools/Session.js';
 
 export default (req, res) => {
     const { username, password } = req.body;

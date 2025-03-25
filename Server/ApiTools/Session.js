@@ -39,32 +39,34 @@ export const getCookieValue = (req, key) => {
 };
 
 export const verifySession = (req) => {
-  const sessionId = getCookieValue(req, "sessionId");
-  if (!sessionId) {
-    return false;
-  }
-  return getSessionBySessionId(sessionId).then((session) => {
-    if (!session) {
-      return false;
+  return new Promise((resolve, reject) => {
+    const sessionId = getCookieValue(req, "sessionId");
+    if (!sessionId) {
+      return resolve("Unauthorized");
     }
-    if (session.expirationDate < Date.now()) {
-      deleteSession(sessionId);
-      return false;
-    }
-    return sessionId;
+    return getSessionBySessionId(sessionId).then((session) => {
+      if (!session) {
+        return resolve("Unauthorized");
+      }
+      if (session.expirationDate < Date.now()) {
+        deleteSession(sessionId);
+        return resolve("Unauthorized");
+      }
+      return resolve(session);
+    });
   });
 };
 
 export const verifyUser = (req, res, func) => {
   verifySession(req)
     .then((result) => {
-      if (!result) {
+      if (result === "Unauthorized") {
         return res.status(401).json({ message: "Unauthorized" });
       }
       return func(req, res, result);
     })
     .catch((err) => {
       console.error(err);
-      return res.status(500).json({ message: "Internal Server Error" });
-    })
+      return res.status(500).json({ message: err });
+    });
 };

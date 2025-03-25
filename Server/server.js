@@ -1,15 +1,15 @@
 import express from 'express';
 import setupSQL from './DBtools/sqliteSetup.js';
-import { verifyUser } from './Session/Session.js';
-import loginHandler from './api/login.js';
-import signupHandler from './api/signup.js';
-import greetingHandler from './api/greeting.js';
-import logoutHandler from './api/logout.js';
-import mailHandler from './api/mail.js';
-import composeMailHandler from './api/compose.js';
-import viewMailHandler from './api/view.js';
-import accountHandler from './api/account.js';
-import changePasswordHandler from './api/changePassword.js';
+import { verifyUser } from './ApiTools/Session.js';
+import loginHandler from './api/account/login.js';
+import signupHandler from './api/account/signup.js';
+import greetingHandler from './api/greeting/greeting.js';
+import logoutHandler from './api/account/logout.js';
+import mailHandler from './api/mail/mail.js';
+import composeMailHandler from './api/mail/compose.js';
+import viewMailHandler from './api/mail/view.js';
+import accountHandler from './api/account/account.js';
+import changePasswordHandler from './api/account/changePassword.js';
 
 const router = express.Router();
 

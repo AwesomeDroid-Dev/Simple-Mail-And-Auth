@@ -1,13 +1,13 @@
-import { getUserBySessionId } from "../DBtools/read.js";
-import { editUser } from "../DBtools/write.js";
-import { hashPassword, verifyPassword } from "../Encryption/encryption.js";
+import { readByUserId } from "../../DBtools/read.js";
+import { editUser } from "../../DBtools/write.js";
+import { hashPassword, verifyPassword } from "../../Encryption/encryption.js";
 
-export default (req, res, sessionId) => {
+export default (req, res, session) => {
   const { newPassword, password, input } = req.body;
 
   // If input is true, check the password
   if (input) {
-    return getUserBySessionId(sessionId)
+    return readByUserId(session.userId)
       .then((user) => {
         if (verifyPassword(password, user.hashedPassword)) {
           return res.status(200).json({ message: "Password is correct", ok: true });
@@ -30,7 +30,7 @@ export default (req, res, sessionId) => {
     return res.status(400).json({ message: "New password is required" });
   }
 
-  getUserBySessionId(sessionId)
+  readByUserId(session.userId)
     .then((user) => {
       if (!user) {
         return res.status(404).json({ message: "User not found" });
