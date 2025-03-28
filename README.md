@@ -14,7 +14,7 @@ A simple authentication system with user accounts and a mail system, built from 
 
 1. Clone the repository:
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/AwesomeDroid-Dev/Simple-Mail-And-Auth
    cd simple-mail-auth
    ```
 
