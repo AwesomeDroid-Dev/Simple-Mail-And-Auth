@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import sqlite3 from "sqlite3";
-import { getSessionBySessionId } from "../DBtools/read.js";
-import { deleteSession } from "../DBtools/write.js";
+import { getSessionBySessionId } from "../../DBtools/read.js";
+import { deleteSession } from "../../DBtools/write.js";
 
 const db = new sqlite3.Database("blassera.db");
 

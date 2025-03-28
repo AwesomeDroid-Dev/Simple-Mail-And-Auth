@@ -55,6 +55,8 @@ export const getMailByEmailId = (emailId) => {
     db.get('SELECT * FROM mail WHERE emailId = ?', emailId, (err, row) => {
       if (err) {
         reject(err);
+      } else if (!row) {
+        reject('Mail not found');
       } else {
         resolve(row);
       }

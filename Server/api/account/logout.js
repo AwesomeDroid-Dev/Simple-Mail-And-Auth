@@ -1,4 +1,4 @@
-import { deleteSession } from "../../DBtools/write.js";
+import { deleteSession } from "../../../DBtools/write.js";
 
 export default (_req, res, session) => {
     if (!session) {

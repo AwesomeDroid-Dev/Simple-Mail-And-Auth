@@ -2,7 +2,8 @@ import {
   readByUserId,
   getMailToUserId,
   getMailByEmailId,
-} from "../DBtools/read.js";
+} from "../../DBtools/read.js";
+import { userIdToTag } from "../ApiTools/account.js";
 
 export const getMail = (userId) => {
   return getMailToUserId(userId);
@@ -17,8 +18,8 @@ export const getMailById = (emailId) => {
             readByUserId(mail.toId).then((to) => {
               resolve({
                 id: mail.emailId,
-                from: from.username,
-                to: to.username,
+                from: from.username+" #"+userIdToTag(mail.fromId),
+                to: to.username+" #"+userIdToTag(mail.toId),
                 subject: mail.subject,
                 body: mail.body,
               });
@@ -45,4 +46,20 @@ export const parseMail = (mail) => {
       }))
     )
   );
+};
+
+export const hasAccess = (mailId, userId) => {
+  return new Promise((resolve, reject) => {
+    getMailByEmailId(Number(mailId))
+      .then((mail) => {
+        if (mail.fromId === userId || mail.toId === userId) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };

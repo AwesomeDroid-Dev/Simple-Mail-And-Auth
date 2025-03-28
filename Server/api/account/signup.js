@@ -1,5 +1,5 @@
-import { readByUsername } from '../../DBtools/read.js';
-import { insertUser } from '../../DBtools/write.js';
+import { readByUsername } from '../../../DBtools/read.js';
+import { insertUser } from '../../../DBtools/write.js';
 import { hashPassword } from '../../Encryption/encryption.js';
 import { createSessionId } from '../../ApiTools/Session.js';
 

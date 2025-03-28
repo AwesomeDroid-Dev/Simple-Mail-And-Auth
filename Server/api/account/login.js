@@ -1,4 +1,4 @@
-import { readByUsername } from '../../DBtools/read.js';
+import { readByUsername } from '../../../DBtools/read.js';
 import { verifyPassword } from '../../Encryption/encryption.js';
 import { createSessionId } from '../../ApiTools/Session.js';
 

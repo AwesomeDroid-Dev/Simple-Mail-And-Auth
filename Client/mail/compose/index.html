@@ -8,7 +8,13 @@
   <h1>Compose Email</h1>
   <form class="container" id="composeForm" name="composeForm" onsubmit="return validateForm()">
       <label for="to"><b>To</b></label>
-      <input type="text" placeholder="Enter recipient's email" name="to" id="to" required>
+      <input type="text" style="display: none" name="to" id="to">
+      <div class="to-container">
+        <input class="to-username" type="text" placeholder="Recipient's Username" name="to" id="to-username" required>
+        <label for="to"><b>#</b></label>
+        <input class="to-tag" type="text" placeholder="Recipient's Tag" name="to" id="to-tag" required>
+        <button onclick="selectRecipient()">Select</button>
+      </div>
       <label for="subject"><b>Subject</b></label>
       <input type="text" placeholder="Enter subject" name="subject" id="subject" required>
       <label for="body"><b>Body</b></label>

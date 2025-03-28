@@ -1,7 +1,7 @@
 {
-  "name": "blassera",
+  "name": "simple-mail-auth",
   "version": "1.0.0",
-  "description": "Clone of classera",
+  "description": "A simple mail and auth system using express and plain HTML.",
   "license": "ISC",
   "author": "",
   "type": "module",

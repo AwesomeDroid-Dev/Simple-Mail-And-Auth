@@ -3,7 +3,10 @@ console.log(new URLSearchParams(window.location.search).get("emailId"))
 fetch(`/api/mail/view?emailId=${new URLSearchParams(window.location.search).get("emailId")}`)
   .then((response) => response.json())
   .then((data) => {
-    emailData = data;
+    if (!data.success) {
+      alert(data.message);
+    }
+    emailData = data.mail;
     const emailContainer = document.getElementById("email");
     const emailSubject = document.createElement("h2");
     emailSubject.textContent = emailData.subject;

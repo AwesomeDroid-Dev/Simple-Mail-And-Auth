@@ -1,12 +1,13 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  color: #333;
 }
 
 h1 {
@@ -45,17 +46,18 @@ input[type=text], input[type=password] {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #3498db;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 12px 25px;
+  margin: 10px 0;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  opacity: 0.8;
+  background-color: #2980b9;
 }
 
 .username, .password {
@@ -94,4 +96,12 @@ button:hover {
 
 .passwordButton:hover {
   background-color: #2980b9;
+}
+
+.hidden-password {
+  cursor: default;
+  font-weight: lighter;
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
 }

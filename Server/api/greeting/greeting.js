@@ -1,4 +1,4 @@
-import { readByUserId } from "../../DBtools/read.js";
+import { readByUserId } from "../../../DBtools/read.js";
 
 export default (_req, res, session) => {
   //It is not sessionId it is session

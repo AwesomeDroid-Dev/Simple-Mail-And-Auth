@@ -35,7 +35,7 @@ const insertUser = ({ username, password }) => {
 
 const editUser = (userId, { username, hashedPassword }) => {
     return new Promise((resolve, reject) => {
-        db.run('UPDATE users SET username = ?, hashedPassword = ? WHERE userId = ?', username, hashedPassword, userId, function(err) {
+        db.run('UPDATE users SET username = ?, hashedPassword = ? WHERE userId = ?', username, hashedPassword, Number(userId), function(err) {
             if (err) {
                 reject(err);
             } else {

@@ -1,4 +1,4 @@
-import { readByUserId } from "../../DBtools/read.js";
+import { readByUserId } from "../../../DBtools/read.js";
 import { userIdToTag } from "../../ApiTools/account.js";
 
 export default (_req, res, session) => {

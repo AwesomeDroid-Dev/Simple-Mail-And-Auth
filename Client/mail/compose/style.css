@@ -1,12 +1,13 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  color: #333;
 }
 
 h1 {
@@ -42,21 +43,22 @@ input[type=text], textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  resize: none;
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #3498db;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 12px 25px;
+  margin: 10px 0;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #2980b9;
 }
 
 p {
@@ -72,3 +74,38 @@ a:hover {
   text-decoration: underline;
 }
 
+.to-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 3px;
+}
+
+.to-username, .to-tag {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.to-username {
+  flex: 0 0 50%;
+}
+
+.to-tag {
+  flex: 0 0 30%;
+}
+
+.to-container button {
+  flex: 0 0 15%;
+}
+
+.selected {
+  background-color: #848484;
+  border-color: #555;
+  cursor: not-allowed;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+}
