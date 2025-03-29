@@ -30,6 +30,9 @@ A simple authentication system with user accounts and a mail system, built from 
 
 The project will run on [http://localhost:3003](http://localhost:3003).
 
+## TODO
+- When I first started this project I was not aware of the "await" keyword, if I even come back to this I will revamp the code to make it neater
+
 ## Requirements
 
 - Node.js (v16 or later)
