@@ -16,7 +16,7 @@ export const readByUsername = (username) => {
 
 export const readByUserId = (id) => {
   return new Promise((resolve, reject) => {
-    db.get('SELECT * FROM users WHERE userId = ?', id, (err, row) => {
+    db.get('SELECT * FROM users WHERE id = ?', id, (err, row) => {
       if (err) {
         reject(err);
       } else {
@@ -28,7 +28,7 @@ export const readByUserId = (id) => {
 
 export const getSessionByUserId = (userId) => {
   return new Promise((resolve, reject) => {
-    db.get('SELECT * FROM sessions WHERE userId = ?', userId, (err, row) => {
+    db.get('SELECT * FROM sessions WHERE id = ?', userId, (err, row) => {
       if (err) {
         reject(err);
       } else {
@@ -40,7 +40,7 @@ export const getSessionByUserId = (userId) => {
 
 export const getSessionBySessionId = (sessionId) => {
   return new Promise((resolve, reject) => {
-    db.get('SELECT * FROM sessions WHERE sessionId = ?', sessionId, (err, row) => {
+    db.get('SELECT * FROM sessions WHERE id = ?', sessionId, (err, row) => {
       if (err) {
         reject(err);
       } else {
@@ -52,7 +52,7 @@ export const getSessionBySessionId = (sessionId) => {
 
 export const getMailByEmailId = (emailId) => {
   return new Promise((resolve, reject) => {
-    db.get('SELECT * FROM mail WHERE emailId = ?', emailId, (err, row) => {
+    db.get('SELECT * FROM mail WHERE id = ?', emailId, (err, row) => {
       if (err) {
         reject(err);
       } else if (!row) {

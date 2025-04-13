@@ -10,6 +10,6 @@ export default (req, res, _session) => {
         if (!user) {
             return res.status(404).json({ message: "Recipient not found" });
         }
-        return res.status(200).json({ message: "Recipient selected successfully!", recipient: { username: user.username, tag: tag, userId: user.userId } });
+        return res.status(200).json({ message: "Recipient selected successfully!", recipient: { username: user.username, tag: tag, userId: user.id } });
     });
 };

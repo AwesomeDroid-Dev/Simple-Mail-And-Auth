@@ -1,4 +1,4 @@
-import { deleteSession } from "../DBtools/write.js";
+import { DB } from "../DBtools/write.js";
 import { getSessionBySessionId } from "../DBtools/read.js";
 
 export default (req, res, next) => {
@@ -34,7 +34,7 @@ const verifySession = (req) => {
         return resolve("Unauthorized");
       }
       if (session.expirationDate < Date.now()) {
-        deleteSession(sessionId);
+        DB.sessions.remove({id: sessionId});
         return resolve("Unauthorized");
       }
       return resolve(session);

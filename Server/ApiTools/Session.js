@@ -1,28 +1,19 @@
 import { v4 as uuidv4 } from "uuid";
-import sqlite3 from "sqlite3";
 import { getSessionBySessionId } from "../../DBtools/read.js";
-import { deleteSession } from "../../DBtools/write.js";
-
-const db = new sqlite3.Database("blassera.db");
+import { DB } from "../../DBtools/write.js";
 
 export const createSessionId = (userId) => {
-  const sessionId = uuidv4(); // Generate a unique session ID
-  db.run("DELETE FROM sessions WHERE userId = ?", userId);
+  const id = uuidv4(); // Generate a unique session ID
+  DB.sessions.remove({userId: userId});
   const expirationDate = Date.now() + 60 * 60 * 1000; // 1 hour session
   return new Promise((resolve, reject) => {
-    db.run(
-      "INSERT INTO sessions (sessionId, userId, expirationDate) VALUES (?, ?, ?)",
-      sessionId,
-      userId,
-      expirationDate,
-      function (err) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(sessionId);
-        }
-      }
-    );
+    DB.sessions.insert([id, userId, expirationDate])
+    .then(() => {
+      resolve(id)
+    })
+    .catch((err) => {
+      reject(err)
+    })
   });
 };
 
@@ -49,7 +40,7 @@ export const verifySession = (req) => {
         return resolve("Unauthorized");
       }
       if (session.expirationDate < Date.now()) {
-        deleteSession(sessionId);
+        DB.sessions.remove({id: sessionId});
         return resolve("Unauthorized");
       }
       return resolve(session);
