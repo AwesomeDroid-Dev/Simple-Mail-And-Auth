@@ -1,4 +1,4 @@
-import { DB } from "../../../DBtools/write.js";
+import { DB } from "../../../DBtools/db.js";
 
 export default (req, res, session) => {
   const { to, subject, body } = req.body;

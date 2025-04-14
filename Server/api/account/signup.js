@@ -1,5 +1,4 @@
-import { readByUsername } from '../../../DBtools/read.js';
-import { DB } from '../../../DBtools/write.js';
+import { DB } from '../../../DBtools/db.js';
 import { hashPassword } from '../../Encryption/encryption.js';
 import { createSessionId } from '../../ApiTools/Session.js';
 import logger from '../../logger.js';
@@ -7,7 +6,7 @@ import logger from '../../logger.js';
 export default async (req, res) => {
     const { username, password } = req.body;
     logger.info(`User ${username} is attempting to sign up`);
-    const user = await readByUsername(username);
+    const user = await DB.users.read('username', username);
     logger.info('Checking if user already exists');
     if (user) {
         logger.info('User already exists');

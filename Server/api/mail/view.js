@@ -1,4 +1,3 @@
-import { readByUserId } from "../../../DBtools/read.js";
 import { getMailById, hasAccess } from "../../ApiTools/mail.js";
 
 export default (req, res, session) => {

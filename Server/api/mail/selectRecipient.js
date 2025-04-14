@@ -1,4 +1,4 @@
-import { readByUserId } from "../../../DBtools/read.js";
+import { DB } from "../../../DBtools/db.js";
 import { tagToUserId } from "../../ApiTools/account.js";
 
 export default (req, res, _session) => {
@@ -6,7 +6,7 @@ export default (req, res, _session) => {
     if (!tag || !username) {
         return res.status(400).json({ message: "Recipient is required" });
     }
-    readByUserId(tagToUserId(tag)).then((user) => {
+    DB.users.get(tagToUserId(tag)).then((user) => {
         if (!user) {
             return res.status(404).json({ message: "Recipient not found" });
         }

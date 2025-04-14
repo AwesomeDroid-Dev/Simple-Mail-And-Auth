@@ -1,4 +1,4 @@
-import { DB } from "../../../DBtools/write.js";
+import { DB } from "../../../DBtools/db.js";
 import logger from "../../logger.js";
 
 export default (_req, res, session) => {
@@ -7,7 +7,7 @@ export default (_req, res, session) => {
         return res.status(401).json({ message: "Failed to fetch session" });
     }
     logger.info("Logging out!");
-    DB.sessions.remove({ id: session.id })
+    DB.sessions.remove("id", session.id)
         .then(() => {
             res.clearCookie("sessionId");
             logger.info("Logout successful!");

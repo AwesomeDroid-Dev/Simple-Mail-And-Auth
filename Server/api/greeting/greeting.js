@@ -1,8 +1,8 @@
-import { readByUserId } from "../../../DBtools/read.js";
+import { DB } from "../../../DBtools/db.js";
 
 export default async (_req, res, session) => {
   try {
-    let user = await readByUserId(session.userId);
+    let user = await DB.users.get(session.userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

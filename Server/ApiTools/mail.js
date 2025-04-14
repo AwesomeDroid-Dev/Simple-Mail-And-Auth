@@ -1,19 +1,15 @@
-import {
-  readByUserId,
-  getMailToUserId,
-  getMailByEmailId,
-} from "../../DBtools/read.js";
+import { DB } from "../../DBtools/db.js";
 import { userIdToTag } from "../ApiTools/account.js";
 
 export const getMail = (userId) => {
-  return getMailToUserId(userId);
+  return DB.mail.readAll("toId", Number(userId));
 };
 
 export const getMailById = async (emailId) => {
   try {
-    const mail = await getMailByEmailId(Number(emailId));
-    const from = await readByUserId(mail.fromId);
-    const to = await readByUserId(mail.toId);
+    const mail = await DB.mail.get(Number(emailId));
+    const from = await DB.users.get(mail.fromId);
+    const to = await DB.users.get(mail.toId);
 
     return {
       id: mail.emailId,
@@ -30,7 +26,7 @@ export const getMailById = async (emailId) => {
 export const parseMail = (mail) => {
   return Promise.all(
     mail.map((mail) =>
-      readByUserId(mail.fromId).then((user) => ({
+      DB.users.get(mail.fromId).then((user) => ({
         id: mail.id,
         from: user.username,
         subject: mail.subject,
@@ -42,7 +38,7 @@ export const parseMail = (mail) => {
 
 export const hasAccess = (mailId, userId) => {
   return new Promise((resolve, reject) => {
-    getMailByEmailId(Number(mailId))
+    DB.mail.get(Number(mailId))
       .then((mail) => {
         if (mail.fromId === userId || mail.toId === userId) {
           resolve(true);

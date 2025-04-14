@@ -1,12 +1,11 @@
-import { readByUserId } from '../../../DBtools/read.js';
-import { DB } from '../../../DBtools/write.js';
+import { DB } from '../../../DBtools/db.js';
 import { hashPassword, verifyPassword } from '../../Encryption/encryption.js';
 import logger from '../../logger.js';
 
 export default async (req, res, session) => {
     const { password, changes } = req.body;
     const { username: newUsername, password: newPassword } = changes;
-    const user = await readByUserId(session.userId);
+    const user = await DB.users.get(session.userId);
     if (!user) {
         return res.status(404).json({ message: 'User not found' });
     }
@@ -18,7 +17,7 @@ export default async (req, res, session) => {
         hashedPassword: newPassword ? hashPassword(newPassword) : user.hashedPassword
     };
     logger.info(`Updating user info for user ${user.username}`);
-    return DB.users.update({ userId: session.userId }, updatedUser)
+    return DB.users.update({ id: session.userId }, updatedUser)
         .then(() => {
             logger.info(`Updated user info for user ${user.username}`);
             return res.status(200).json({ success: true, message: 'User info updated successfully' });

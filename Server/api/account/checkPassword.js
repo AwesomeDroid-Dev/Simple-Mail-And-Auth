@@ -1,10 +1,10 @@
-import { readByUserId } from "../../../DBtools/read.js";
+import { DB } from "../../../DBtools/db.js";
 import { verifyPassword } from "../../Encryption/encryption.js";
 
 export default async (req, res, session) => {
   try {
     const { password } = req.body;
-    const user = await readByUserId(session.userId);
+    const user = await DB.users.get(session.userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

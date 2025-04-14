@@ -1,5 +1,4 @@
-import { DB } from "../DBtools/write.js";
-import { getSessionBySessionId } from "../DBtools/read.js";
+import { DB } from "../DBtools/db.js";
 
 export default (req, res, next) => {
   verifySession(req)
@@ -29,7 +28,7 @@ const verifySession = (req) => {
     if (!sessionId) {
       return resolve("Unauthorized");
     }
-    return getSessionBySessionId(sessionId).then((session) => {
+    return DB.sessions.get(sessionId).then((session) => {
       if (!session) {
         return resolve("Unauthorized");
       }

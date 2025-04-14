@@ -1,13 +1,13 @@
-import { readByUsername } from "../../../DBtools/read.js";
 import { verifyPassword } from "../../Encryption/encryption.js";
 import { createSessionId } from "../../ApiTools/Session.js";
 import logger from "../../logger.js";
+import { DB } from "../../../DBtools/db.js";
 
 export default async (req, res) => {
   const { username, password } = req.body;
   logger.info(`User ${username} is attempting to log in`);
   try {
-    const user = await readByUsername(username);
+    const user = await DB.users.read('username', username);
     if (!user || !verifyPassword(password, user.hashedPassword)) {
       logger.info("Invalid credentials");
       return res.status(401).json({ success: false, message: "Invalid credentials" });
