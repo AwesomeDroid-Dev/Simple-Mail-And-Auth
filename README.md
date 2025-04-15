@@ -31,7 +31,7 @@ A simple authentication system with user accounts and a mail system, built from 
 The project will run on [http://localhost:3003](http://localhost:3003).
 
 ## TODO
-- When I first started this project I was not aware of the "await" keyword, if I even come back to this I will revamp the code to make it neater
+- This project depends completely on refresh tokens and makes no use of JWT or access tokens. When I get back to this project I need to integrate access tokens.
 
 ## Requirements
 
